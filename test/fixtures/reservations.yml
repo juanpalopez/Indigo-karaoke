@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2016-11-07
+  hour: 2016-11-07 00:37:24
+  description: MyText
+  room_id: 
+  client_id: 
+
+two:
+  date: 2016-11-07
+  hour: 2016-11-07 00:37:24
+  description: MyText
+  room_id: 
+  client_id: 

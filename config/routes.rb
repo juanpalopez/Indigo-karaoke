@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  resources :song_list_lines
+  resources :artists
+  resources :songs
+  resources :song_lists
+  resources :events
+  resources :reservations
+  resources :comments
+  resources :rooms
+  resources :branches
+  resources :clients
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
