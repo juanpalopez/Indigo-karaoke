@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161107060850) do
+ActiveRecord::Schema.define(version: 20161108215157) do
 
   create_table "artists", force: :cascade do |t|
     t.string   "name"
@@ -27,6 +27,27 @@ ActiveRecord::Schema.define(version: 20161107060850) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "business_invoices", force: :cascade do |t|
+    t.float    "subtotal"
+    t.float    "tax"
+    t.float    "total"
+    t.integer  "order_id"
+    t.integer  "business_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "business_invoices", ["business_id"], name: "index_business_invoices_on_business_id"
+  add_index "business_invoices", ["order_id"], name: "index_business_invoices_on_order_id"
+
+  create_table "businesses", force: :cascade do |t|
+    t.string   "ruc"
+    t.string   "name"
+    t.string   "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "clients", force: :cascade do |t|
@@ -64,6 +85,61 @@ ActiveRecord::Schema.define(version: 20161107060850) do
 
   add_index "events", ["client_id"], name: "index_events_on_client_id"
   add_index "events", ["room_id"], name: "index_events_on_room_id"
+
+  create_table "measure_units", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "order_lines", force: :cascade do |t|
+    t.integer  "item_order"
+    t.integer  "quantity"
+    t.integer  "product_id"
+    t.float    "subtotal"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "order_lines", ["product_id"], name: "index_order_lines_on_product_id"
+
+  create_table "orders", force: :cascade do |t|
+    t.date     "date"
+    t.time     "time"
+    t.integer  "client_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "orders", ["client_id"], name: "index_orders_on_client_id"
+
+  create_table "person_invoices", force: :cascade do |t|
+    t.float    "total"
+    t.integer  "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "person_invoices", ["order_id"], name: "index_person_invoices_on_order_id"
+
+  create_table "product_categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string   "name"
+    t.float    "price"
+    t.float    "stock"
+    t.integer  "measure_unit_id"
+    t.integer  "product_category_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "products", ["measure_unit_id"], name: "index_products_on_measure_unit_id"
+  add_index "products", ["product_category_id"], name: "index_products_on_product_category_id"
 
   create_table "reservations", force: :cascade do |t|
     t.date     "date"
@@ -119,5 +195,23 @@ ActiveRecord::Schema.define(version: 20161107060850) do
   end
 
   add_index "songs", ["artist_id"], name: "index_songs_on_artist_id"
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end
