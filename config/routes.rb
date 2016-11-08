@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  root 'welcome#index'
+
+  devise_for :users
   resources :businesses
   resources :business_invoices
   resources :person_invoices
@@ -14,8 +17,8 @@ Rails.application.routes.draw do
   resources :events
   resources :reservations
   resources :comments
-  resources :rooms
   resources :branches
+  resources :rooms
   resources :clients
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
