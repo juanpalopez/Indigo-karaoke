@@ -1,0 +1,2 @@
+class PersonInvoicesController < ApplicationController
+end
