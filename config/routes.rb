@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  resources :businesses
+  resources :business_invoices
+  resources :person_invoices
+  resources :order_lines
+  resources :orders
+  resources :measure_units
+  resources :product_categories
+  resources :products
   resources :song_list_lines
   resources :artists
   resources :songs
