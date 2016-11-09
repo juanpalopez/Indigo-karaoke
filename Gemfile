@@ -23,6 +23,8 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+#Gem for LESS
+gem 'less-rails'
 #Twitter-boostrap
 gem 'twitter-bootstrap-rails', '~> 3.2', '>= 3.2.2'
 #Simple form

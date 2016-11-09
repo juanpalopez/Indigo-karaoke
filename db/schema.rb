@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161108215157) do
+ActiveRecord::Schema.define(version: 20161109151429) do
 
   create_table "artists", force: :cascade do |t|
     t.string   "name"
@@ -99,8 +99,10 @@ ActiveRecord::Schema.define(version: 20161108215157) do
     t.float    "subtotal"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "order_id"
   end
 
+  add_index "order_lines", ["order_id"], name: "index_order_lines_on_order_id"
   add_index "order_lines", ["product_id"], name: "index_order_lines_on_product_id"
 
   create_table "orders", force: :cascade do |t|
@@ -209,6 +211,7 @@ ActiveRecord::Schema.define(version: 20161108215157) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "role"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
