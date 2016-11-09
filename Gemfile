@@ -34,6 +34,9 @@ gem 'devise', '~> 4.2'
 #Rails Admin
 gem 'rails_admin', '~> 1.1'
 
+#Gem MYSQL 
+gem 'mysql', '~> 2.9', '>= 2.9.1'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
