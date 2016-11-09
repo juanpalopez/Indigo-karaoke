@@ -51,7 +51,11 @@
             <%= render 'layouts/menu' %>
           </ul>
           <div class="navbar-form navbar-right">
-            <button class="btn btn-success">Iniciar Sesión</button>
+          <% if user_signed_in? %>
+            <button type="submit" class="btn btn-error"> <%= link_to('Cerrar Sesión', destroy_user_session_path, :method => :delete) %></button>
+          <% else %>
+            <button type="submit" class="btn btn-success"><%= link_to('Iniciar Sesión', new_user_session_path) %></button>
+          <%end %>
           </div>
         </div>
       </div>
