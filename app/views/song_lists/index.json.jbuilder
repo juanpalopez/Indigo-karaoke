@@ -1,0 +1,1 @@
+json.array! @song_lists, partial: 'song_lists/song_list', as: :song_list
