@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'pos/index'
+
+  get 'pos/orders'
+
+  get 'pos/payments'
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   root 'pages#index'
 
