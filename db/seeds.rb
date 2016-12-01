@@ -5,3 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+karaoke = ActiveSupport::JSON.decode(File.read('db/seeds/karaoke.json'))
+
+#karaoke.each do |song|
+  #Song.create!(name: song['song'], author: song['author'], time: song['time'], icon_file_name: "#{Rails.root}/public#{song['icon']}", without_protection: True)
+#end
+
+Song.create(name: 'test', author: 'test_author',)

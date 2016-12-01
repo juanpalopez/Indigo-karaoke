@@ -1,21 +1,20 @@
 class PagesController < ApplicationController
+  layout 'index', only: [:index]
   layout 'bare', only: [:login]
   layout 'admin', only: [:dashboard]
 
   def index
   end
 
-  def about_us
+  def albumns
   end
 
-  def contact_us
+  def events
   end
   
-  def login
+  def reservation
+    @reservation = Reservation.new
   end
   
-  def dashboard
-  end
-
-
+  
 end

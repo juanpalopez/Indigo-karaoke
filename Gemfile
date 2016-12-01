@@ -33,6 +33,8 @@ gem 'simple_form', '~> 3.3', '>= 3.3.1'
 gem 'devise', '~> 4.2'
 #Rails Admin
 gem 'rails_admin', '~> 1.1'
+#Paperclip
+gem 'paperclip', '~> 5.1'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

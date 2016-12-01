@@ -7,10 +7,12 @@ Rails.application.routes.draw do
   get 'pos/payments'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  
   root 'pages#index'
-
-  get 'pages/about_us'
-  get 'pages/contact_us'
+  get 'pages/albums'
+  get 'pages/events'
+  get 'pages/reservation'
+  
   get 'dashboard', to: 'pages#dashboard'
 
   devise_for :users, skip: [:sessions]
