@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   root 'pages#index'
   get 'pages/albums'
   get 'pages/events'
+  get 'pages/about_us'
   get 'pages/reservation'
   
   get 'dashboard', to: 'pages#dashboard'

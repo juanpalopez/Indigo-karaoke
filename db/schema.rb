@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161125195925) do
+ActiveRecord::Schema.define(version: 20161204145435) do
 
   create_table "artists", force: :cascade do |t|
     t.string   "name"
@@ -78,12 +78,12 @@ ActiveRecord::Schema.define(version: 20161125195925) do
     t.text     "description"
     t.integer  "capacity"
     t.integer  "room_id"
-    t.integer  "client_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "branch_id"
   end
 
-  add_index "events", ["client_id"], name: "index_events_on_client_id"
+  add_index "events", ["branch_id"], name: "index_events_on_branch_id"
   add_index "events", ["room_id"], name: "index_events_on_room_id"
 
   create_table "measure_units", force: :cascade do |t|
@@ -151,8 +151,10 @@ ActiveRecord::Schema.define(version: 20161125195925) do
     t.integer  "client_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "branch_id"
   end
 
+  add_index "reservations", ["branch_id"], name: "index_reservations_on_branch_id"
   add_index "reservations", ["client_id"], name: "index_reservations_on_client_id"
   add_index "reservations", ["room_id"], name: "index_reservations_on_room_id"
 

@@ -1,35 +1,20 @@
+<% if flash[:notice] %>
+	<div class="alert alert-success">
+			<p id="notice"><%= notice %></p>
+	</div>
+<% end %>
 <div class="contact-form">
-	<!--<form>-->
-	<!--	<div class="contact-bottom">-->
-	<!--		<div class="col-md-4 in-contact">-->
-	<!--			<span>Nombre :</span>-->
-	<!--			<input type="text" class="text" value="">-->
-	<!--		</div>-->
-	<!--		<div class="col-md-4 in-contact">-->
-	<!--			<span>Correo :</span>-->
-	<!--			<input type="text" class="text" value="">-->
-	<!--		</div>-->
-	<!--		<div class="col-md-4 in-contact">-->
-	<!--			<span>Tema :</span>-->
-	<!--			<input type="text" class="text" value="">-->
-	<!--		</div>-->
-	<!--		<div class="clearfix"> </div>-->
-	<!--	</div>-->
-	<!--	<div class="clearfix"> </div>-->
-	<!--	<div class="contact-bottom-top">-->
-	<!--		<span>Mensaje :</span>-->
-	<!--		<textarea> </textarea>-->
-	<!--	</div>-->
-	<!--	<input type="submit" value="Enviar">-->
-	<!--</form>-->
-	
 	<%= simple_form_for (@reservation) do |f| %>
 	    <%= f.error_notification %>
 	    <div class="form-inputs">
 	        <%= f.input :date, as: :date %>
 	        <%= f.input :hour %>
 	        <%= f.input :description, as: :text %>
+	        <%= f.association :branch %>
 	        <%= f.association :room %>
+	    </div>
+	    <div class="form-actions">
+	    	<%= f.button :submit%>
 	    </div>
 	<% end %>
 </div>
