@@ -32,6 +32,7 @@ RailsAdmin.config do |config|
   config.actions do
     dashboard                     # mandatory
     index                         # mandatory
+    #root :my_dashboard, :dashboard
     new
     export
     bulk_delete

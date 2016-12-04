@@ -8,7 +8,8 @@ class PagesController < ApplicationController
   def index
   end
 
-  def albumns
+  def albums
+    @songs = Song.order("RANDOM()").limit(12)
   end
 
   def events

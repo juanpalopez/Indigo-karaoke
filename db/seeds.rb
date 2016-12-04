@@ -5,10 +5,19 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-karaoke = ActiveSupport::JSON.decode(File.read('db/seeds/karaoke.json'))
+karaoke = JSON.parse(File.read("#{Rails.root}/db/karaoke.json"))
 
-#karaoke.each do |song|
-  #Song.create!(name: song['song'], author: song['author'], time: song['time'], icon_file_name: "#{Rails.root}/public#{song['icon']}", without_protection: True)
-#end
+karaoke.each do |song|
+  Song.new(
+      name: song['song'], 
+      author: song['author'], 
+      time: song['time'], 
+      icon:  File.open("#{Rails.root}/public/#{song['icon']}")
+    ).save
+end
 
-Song.create(name: 'test', author: 'test_author',)
+
+# Song.create(name: 'La Bamba',                
+#               author: 'Mini Spring Roll with 10 pieces',                
+#               time: '3:30',
+#                 icon: File.open("#{Rails.root}/public/karaoke/014.jpg"))

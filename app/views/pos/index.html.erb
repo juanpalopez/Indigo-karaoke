@@ -1,2 +1,265 @@
-<h1>Pos#index</h1>
-<p>Find me in app/views/pos/index.html.erb</p>
+<div class="messageTemplate" data-win-control="WinJS.Binding.Template">
+    <div class="message">
+        <div class="userIcon"><img src="#" data-win-bind="src: icon" /></div>
+        <div class="messageContent">
+            <div class="contactInformation">
+                <div class="contactName" data-win-bind="textContent: name"></div>
+                <div class="contactTime" data-win-bind="textContent: time; style.color: readStateColor; style.fontWeight: readStateWeight"></div>
+            </div>
+            <div class="messagePreview" data-win-bind="textContent: messageText; style.color: readStateColor; style.fontWeight: readStateWeight"></div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="smallListIconTextTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
+     <div class="smallListIconTextItem">
+         <img src="#" class="smallListIconTextItem-Image" data-win-bind="src: icon" />
+         <div class="smallListIconTextItem-Detail">
+             <h4 class="win-h4" data-win-bind="textContent: name"></h4>
+             <span class="win-h8" data-win-bind="textContent: author"></span>             
+             <h6 class="win-h6" data-win-bind="textContent: client"></h6>
+         </div>
+     </div>
+ </div>
+
+<div class="smallListIconTextTemplate2" data-win-control="WinJS.Binding.Template" style="display: none">
+     <div class="smallListIconTextItem2">
+         <img src="#" class="smallListIconTextItem-Image" data-win-bind="src: icon" />
+         <div class="smallListIconTextItem-Detail">
+             <h6 class="win-h6" data-win-bind="textContent: name"></h6>
+             <h8 class="win-h8" ><span  data-win-bind="textContent: amount"></span> Soles</h8>
+         </div>
+        <div class="smallListIconTextMessage" data-win-bind="textContent: messageText"></div>
+     </div>
+ </div>
+
+<div class="smallListIconTextTemplate3" data-win-control="WinJS.Binding.Template" style="display: none">
+     <div class="smallListIconTextItem3">
+         <img src="#" class="smallListIconTextItem-Image" data-win-bind="src: icon" />
+         <div class="smallListIconTextItem-Detail">
+             <h6 class="win-h6" data-win-bind="textContent: name"></h6>
+             <h8 class="win-h8" ><span  data-win-bind="textContent: amount"></span> Soles</h8>
+            <br/>Cnt <input class="win-textbox win-interactive" type="number" id="cantidad" name="cantidad" maxlength="2" data-win-bind="value: n"  onchange="Sample.inputChanged()" />
+            <button class="win-button" onclick="Sample.inputAdd()" >+</button>
+         </div>
+     </div>
+ </div>
+
+<div class="smallListIconTextTemplate4" data-win-control="WinJS.Binding.Template" style="display: none">
+     <div class="smallListIconTextItem4">
+         <div class="smallListIconTextItem-Detail">
+             <h6 class="win-h6" data-win-bind="textContent: name"></h6>
+             Monto: <h8 class="win-h8" ><span  data-win-bind="textContent: amount"></span> Soles</h8>
+           ; Cantidad: <h8 class="win-h8"  data-win-bind="textContent: n"></h8>
+            <br/>Total: <h8 class="win-h8"  ><span  data-win-bind="textContent: t"></span> Soles</h8>            
+         </div>
+     </div>
+ </div>
+
+<div id="messageList" data-win-control="WinJS.UI.Pivot" data-win-options="{ selectedIndex: 0 }">
+    <div class="pivotItem" id="pvi0" data-win-control="WinJS.UI.PivotItem" data-win-options="{ 'header': 'Karaoke' }">
+        <div id="mediaPlayerEl" data-win-control="WinJS.UI.MediaPlayer" data-win-options="{}">
+            <video autoplay muted src="images/video1.mp4" type="video/mp4" onloadeddata="this.play();" onpause="this.play();" >
+            </video>
+        </div>
+        <h2>En Cola</h2>
+        <div class="listView win-selectionstylefilled lvkaraoke"
+             data-win-control="WinJS.UI.ListView"
+            data-win-options="{
+                    itemDataSource: Sample.Enque.dataSource,
+                    itemTemplate: select('.smallListIconTextTemplate'),
+                    selectionMode: 'none',
+                    tapBehavior: 'none',
+                    layout: { type: WinJS.UI.ListLayout }
+                }">
+        </div>
+             
+        <br>
+    </div>
+    <div class="pivotItem" id="pvi2" data-win-control="WinJS.UI.PivotItem" data-win-options="{ 'header': 'Canciones' }">
+        <div data-win-control="WinJS.UI.AutoSuggestBox" data-win-options="{
+            placeholderText: 'Ingrese Título, autor o género',
+            onsuggestionsrequested: Sample.suggestionsRequestedHandler,
+            onquerychanged: Sample.querySubmittedHandler
+            }">
+        </div> 
+        <div id="filterklist" class="listView win-selectionstylefilled"
+             data-win-control="WinJS.UI.ListView"
+            data-win-options="{
+                    itemDataSource: Sample.Filterlist.dataSource,
+                    itemTemplate: select('.smallListIconTextTemplate'),
+                    selectionMode: 'single',
+                    tapBehavior: 'toggleSelect',
+                    layout: { type: WinJS.UI.ListLayout },
+                    oniteminvoked: Sample.itemInvokedHandler
+                }">
+        </div>
+
+    </div>
+    <div class="pivotItem" id="pvi1" data-win-control="WinJS.UI.PivotItem" data-win-options="{ 'header': 'Pedidos' }">
+    <div class="headerFooterPlaceholder">
+        <div class="header">
+            <div class="button-well">
+                <button class="win-button" onclick="document.querySelector('#dialog1').winControl.show()">Seleccionar</button>
+                <button class="win-button" onclick="document.querySelector('#plist').winControl.selection.clear()">Limpiar Selecion</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="plist" class="listView win-selectionstylefilled lvpedidos"
+         data-win-control="WinJS.UI.ListView"
+         data-win-options="{
+                    itemDataSource: Sample.Grouped.dataSource,
+                    itemTemplate: select('.smallListIconTextTemplate2'),
+                    groupDataSource: Sample.Grouped.groups.dataSource,
+                    selectionMode: 'multi',
+                    tapBehavior: 'toggleSelect',
+                    layout: { type: WinJS.UI.ListLayout, groupHeaderPosition: 'top' }
+            }">
+    </div>
+
+    </div>
+    <div class="pivotItem" id="pvi2" data-win-control="WinJS.UI.PivotItem" data-win-options="{ 'header': 'Confirmaci&oacute;n' }">
+
+      <div class="headerFooterPlaceholder">
+        <div class="header">
+            <div class="button-well">
+                <button class="win-button" onclick="document.querySelector('#dialog2').winControl.show()" >Eliminar Seleccionados</button>
+                <button class="win-button" onclick="document.querySelector('#dialog4').winControl.show()" >Confirmar</button>
+            </div>
+            <h3 class="win-h3">Monto Total: <span id="amount" data-win-bind="textContent: context.currentMode.name">0.00</span> Soles</h3>
+   
+        </div>
+      </div>        
+      <div id="slist" class="listView win-selectionstylefilled"
+         data-win-control="WinJS.UI.ListView"
+         data-win-options="{
+                    itemDataSource: Sample.Mlista2.dataSource,
+                    itemTemplate: select('.smallListIconTextTemplate3'),
+                    selectionMode: 'multi',
+                    tapBehavior: 'toggleSelect',
+                    layout: { type: WinJS.UI.ListLayout, groupHeaderPosition: 'top' }
+            }">
+    </div>     
+    </div>
+    <div class="pivotItem" id="pvi2" data-win-control="WinJS.UI.PivotItem" data-win-options="{ 'header': 'Cuenta' }">
+        <div class="headerFooterPlaceholder">
+        <div class="header">
+
+            <h3 class="win-h3">Total: <span id="amount2" data-win-bind="textContent: context.currentMode.name">0.00</span> Soles</h3>
+   
+        </div>
+      </div>        
+      <div id="flist" class="listView win-selectionstylefilled"
+         data-win-control="WinJS.UI.ListView"
+         data-win-options="{
+                    itemDataSource: Sample.Mlista3.dataSource,
+                    itemTemplate: select('.smallListIconTextTemplate4'),
+                    selectionMode: 'none',
+                    tapBehavior: 'none',
+                    layout: { type: WinJS.UI.ListLayout, groupHeaderPosition: 'top' }
+            }">
+    </div>   
+    </div>
+    <div class="pivotItem" id="pvi2" data-win-control="WinJS.UI.PivotItem" data-win-options="{ 'header': 'Comunicaci&oacute;n' }">
+
+        <div class="headerFooterPlaceholder">
+        <div class="header">
+            <textarea id="messageText" class="win-interactive win-textarea"  rows="4" cols="100" width="600px"></textarea> 
+            <button class="win-button" onclick="var d=new Date();var txta=document.querySelector('#messageText');Sample.Inbox.unshift({ name: 'Renan Abarca', icon: 'images/people/101.jpg', time: d.getHours()+':'+d.getMinutes(), readStateColor: 'rgba(255, 255, 255, .4)', readStateWeight:'', messageText: txta.value });txta.value='';txta.focus();">Enviar</button>            
+        </div>
+        </div>        
+        <div id="chatlist"  class="listView win-selectionstylefilled"
+            data-win-control="WinJS.UI.ListView"
+            data-win-options="{
+                    itemDataSource: Sample.Inbox.dataSource,
+                    itemTemplate: select('.messageTemplate'),
+                    selectionMode: 'none',
+                    tapBehavior: 'none',
+                    layout: { type: WinJS.UI.ListLayout, groupHeaderPosition: 'top' }
+            }">
+        </div>   
+    </div>
+
+    <div class="pivotItem" id="pvi2" data-win-control="WinJS.UI.PivotItem" data-win-options="{ 'header': 'Conexi&oacute;n' }">
+    
+    
+                <div class="twoColumnFormContainer">
+                    <div class="inputText">
+                        <label>
+                            Usuario<br />
+                            <input class="win-textbox" type="text" name="userName" />
+                        </label>
+                    </div>
+                    <div class="inputPass">
+                        <label>
+                            Password<br />
+                            <input class="win-textbox" type="password" name="password" />
+                        </label>
+                    </div>
+                    <div class="inputEmail">
+                        <label>
+                            Email<br />
+                            <input class="win-textbox" type="email" name="email" />
+                        </label>
+                    </div>
+                    <div class="inputPhone">
+                        <label>
+                            Tel&eacute;fono<br />
+                            <input class="win-textbox" type="tel" name="telephone" />
+                        </label>
+                    </div>
+
+                    <button class="win-button" data-win-options="{}" >Conexi&oacute;n</button>
+                    <button class="win-button" data-win-options="{}" >Cancelar</button>                                      
+                </div>
+
+
+
+    </div>
+</div>
+<div id="labelFlyout" data-win-control="WinJS.UI.Flyout" aria-label="{Modificar T&iacute;tulo }" data-win-bind="onbeforeshow:Sample.formatLabelFlayout" >
+    <div>Modifique el t&iacute;tulo de la p&aacute;gina activa</div>
+    <div><input name="labelPage" id="labelPage"   /></div>
+    <p ></p>
+    <button class="win-button" data-win-options="{onclick:Sample.cancelLabelFlayout}" >Cancelar</button>
+    <button class="win-button" data-win-options="{onclick:Sample.applyLabelFlayout}" >Aplicar</button>
+</div>
+
+    <div id="dialog1" data-win-control="WinJS.UI.ContentDialog" data-win-options="{
+             title: 'Seleccionar Pedido',
+             primaryCommandText: 'Aceptar',
+             secondaryCommandText: 'Cancelar'
+        }">
+        Desea Realizar este Pedido.
+    </div>
+    <div  id="dialog2" data-win-control="WinJS.UI.ContentDialog" data-win-options="{
+             title: 'Eliminar Pedido',
+             primaryCommandText: 'Aceptar',
+             secondaryCommandText: 'Cancelar'
+        }">
+        Desea Eliminar Items Seleccionados.
+    </div>
+    <div id="dialog3" data-win-control="WinJS.UI.ContentDialog" data-win-options="{
+             title: 'Seleccionar Canci&oacute;n',
+             primaryCommandText: 'Aceptar',
+             secondaryCommandText: 'Cancelar'
+        }">
+        Desea Seleccionar esta canci&oacute;n.
+    </div>
+    <div id="dialog4" data-win-control="WinJS.UI.ContentDialog" data-win-options="{
+             title: 'Seleccionar Pedido',
+             primaryCommandText: 'Aceptar',
+             secondaryCommandText: 'Cancelar'
+        }">
+        Desea Confirmar este Pedido.
+    </div>
+    <div id="dialog5" data-win-control="WinJS.UI.ContentDialog" data-win-options="{
+             title: 'Pedido Atendido',
+             primaryCommandText: 'Aceptar'
+        }">
+        Su Pedido ser&aacute; entregado en breve.
+    </div>
