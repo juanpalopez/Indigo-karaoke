@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @song_list.date %>
+</p>
+
+<p>
+  <strong>Hour:</strong>
+  <%= @song_list.hour %>
+</p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @song_list.client %>
+</p>
+
+<%= link_to 'Edit', edit_song_list_path(@song_list) %> |
+<%= link_to 'Back', song_lists_path %>

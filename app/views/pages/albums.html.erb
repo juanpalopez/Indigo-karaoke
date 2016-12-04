@@ -1,0 +1,23 @@
+<!--content-->
+<div class="gallery">
+	<div class="container">
+		<!--content-top-->
+		<div class="content-top">
+			<h3>Mis albumes</h3>
+		</div>
+		<!--//content-top-->
+		<!--content-mid-->
+		
+		<div class="row">
+			<% @songs.each do |song| %>
+			<div class="col-md-4">
+				<h4><%= song.author %></h4>
+				<img src="<%= song.icon %>" />
+			</div>
+
+			<% end %>
+		</div>
+		<!--content-mid-->
+	</div>
+</div>
+<!--//content-->

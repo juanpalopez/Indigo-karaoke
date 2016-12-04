@@ -1,4 +1,50 @@
 Rails.application.routes.draw do
+
+  get 'reports/index'
+
+  get 'pos/index'
+
+  get 'pos/orders'
+
+  get 'pos/payments'
+
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  
+  root 'pages#index'
+  get 'pages/albums'
+  get 'pages/events'
+  get 'pages/about_us'
+  get 'pages/reservation'
+  
+  get 'dashboard', to: 'pages#dashboard'
+
+  devise_for :users, skip: [:sessions]
+  as :user do
+    get 'login', to: 'devise/sessions#new', as: :new_user_session
+    post 'login', to: 'devise/sessions#create', as: :user_session
+    delete 'logout', to: 'devise/sessions#destroy', as: :destroy_user_session
+  end
+
+
+  # devise_for :users
+  resources :businesses
+  resources :business_invoices
+  resources :person_invoices
+  resources :order_lines
+  resources :orders
+  resources :measure_units
+  resources :product_categories
+  resources :products
+  resources :song_list_lines
+  resources :artists
+  resources :songs
+  resources :song_lists
+  resources :events
+  resources :reservations
+  resources :comments
+  resources :branches
+  resources :rooms
+  resources :clients
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
